@@ -258,32 +258,12 @@ typedef struct NslConfig_
 	int 								edgeThresholdValue;
 	int 								interferenceDetectionLimitValue;
 	NslOption::FUNCTION_OPTIONS 		interferenceDetectionLastValueOpt;
+	int 								edgeThresholdValue3D;
 
 	// frame Rate
 	NslOption::FRAME_RATE_OPTIONS 		frameRateOpt;
 }NslConfig, *LP_NslConfig;
 
-
-
-typedef struct NslFrameInfo_{
-	NslOption::OPERATION_MODE_OPTIONS 	operationMode; // DISTANCE_MODE, DISTANCE_AMPLITUDE_MODE, DISTANCE_GRAYSCALE_MODE, RGB_MODE, RGB_DISTANCE_MODE, RGB_DISTANCE_AMPLITUDE_MODE, RGB_DISTANCE_GRAYSCALE_MODE
-	NslOption::NSL_DATA_TYPE 			dataType; // NONE_DATA_TYPE, DISTANCE_DATA_TYPE, DISTANCE_GRAYSCALE_DATA_TYPE, DISTANCE_AMPLITUDE_DATA_TYPE, RGB_DATA_TYPE
-	int width;				// Width of lidar or rgb image
-	int height;				// height of lidar or rgb image
-	int roiXMin;			// Starting point of horizontal line
-	int roiYMin;			// Starting point of vertical line
-	int binning_h;			// 1 : normal operation, 2 : horizontal binning
-	int binning_v;			// 1 : normal operation, 2 : vertical binning
-	unsigned char *pData;	// start address of lidar or RGB data
-	unsigned char *pDataOption; // start address of lidar or RGB option data
-	double	temperature;
-}NslFrameInfo;
-
-
-typedef struct NslFrame_{
-	int itemCount;
-	NslFrameInfo info[2];
-}NslFrame;
 
 
 typedef struct NslPCD_{
@@ -524,6 +504,27 @@ NSLTOF_API NslOption::NSL_ERROR_TYPE nsl_setFilter(int handle, NslOption::FUNCTI
  * @return NSL_ERROR_TYPE 
  */
 NSLTOF_API NslOption::NSL_ERROR_TYPE nsl_getFilter(int handle, NslOption::FUNCTION_OPTIONS *enableMedian, NslOption::FUNCTION_OPTIONS *enableGauss, int *temporalFactor, int *temporalThreshold, int *edgeThreshold, int *interferenceDetectionLimit, NslOption::FUNCTION_OPTIONS *enableInterferenceDetectionLastValue);
+
+/**
+ * @brief Sets the filter of the lidar.
+ * 
+ * @param handle : handle value by nsl_open()
+ * @param *edgeThreshold : 0 ~ 5000 <0 : off, 1 ~ 5000 : edge threshold value>
+ * 
+ * @return NSL_ERROR_TYPE 
+ */
+NSLTOF_API NslOption::NSL_ERROR_TYPE nsl_set3DFilter(int handle, int edgeThreshold);
+
+
+/**
+ * @brief Read the filter of the lidar.
+ * 
+ * @param handle : handle value by nsl_open()
+ * @param *edgeThreshold : 0 ~ 5000 <0 : off, 1 ~ 5000 : edge threshold value>
+ * 
+ * @return NSL_ERROR_TYPE 
+ */
+NSLTOF_API NslOption::NSL_ERROR_TYPE nsl_get3DFilter(int handle, int *edgeThreshold);
 
 
 /**

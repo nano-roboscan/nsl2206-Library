@@ -92,13 +92,6 @@ namespace  NslOption {
 		DISTANCE_AMPLITUDE_MODE = 2,
 	};
 
-	enum class NSL_DATA_TYPE
-	{
-		NONE_DATA_TYPE = 0,
-		DISTANCE_DATA_TYPE = 1,
-		DISTANCE_AMPLITUDE_DATA_TYPE = 2
-	};
-
 	enum class NSL_ERROR_TYPE
 	{
 		NSL_SUCCESS = 0,
@@ -185,16 +178,6 @@ namespace  NslOption {
             case OPERATION_MODE_OPTIONS::NONE_MODE:   					return "NONE_MODE";
             case OPERATION_MODE_OPTIONS::DISTANCE_MODE: 				return "DISTANCE_MODE";
             case OPERATION_MODE_OPTIONS::DISTANCE_AMPLITUDE_MODE: 		return "DISTANCE_AMPLITUDE_MODE";
-        }
-
-		return "Unknown";
-    }
-
-	inline const char* toString(NSL_DATA_TYPE c) {
-        switch (c) {
-            case NSL_DATA_TYPE::NONE_DATA_TYPE:   				return "NONE_DATA_TYPE";
-            case NSL_DATA_TYPE::DISTANCE_DATA_TYPE: 			return "DISTANCE_DATA_TYPE";
-            case NSL_DATA_TYPE::DISTANCE_AMPLITUDE_DATA_TYPE:  	return "DISTANCE_AMPLITUDE_DATA_TYPE";
         }
 
 		return "Unknown";
@@ -348,7 +331,7 @@ NSLTOF_API NslOption::NSL_ERROR_TYPE nsl_streamingOff(int handle);
  * 
  * @return NSL_ERROR_TYPE 
  */
-NSLTOF_API NslOption::NSL_ERROR_TYPE nsl_getPointCloudData(int handle, NslPCD *pcdData, int waitTimeMs = 0);
+NSLTOF_API NslOption::NSL_ERROR_TYPE nsl_getPointCloudData(int handle, NslPCD *pcdData, int waitTimeMs);
 
 
 /**
